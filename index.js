@@ -25,6 +25,6 @@ mongoose
         console.log(e);
     });
 
-app.listen(port, () => {
-    console.log(`connected at port ${port}`);
+app.listen(3000, () => {
+    console.log(`connected at port 3000`);
 });
