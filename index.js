@@ -6,7 +6,8 @@ const mongoose = require('mongoose');
 const authRouter = require('./routes/auth');
 
 // INIT
-const PORT = 3000;
+const port = Process.env.PORT || 3000;
+//const PORT = 3000;
 const app = express();
 const DB = "mongodb+srv://paynow:NowPay2022Project@cluster0.tpa8stj.mongodb.net/?retryWrites=true&w=majority";
 
@@ -24,6 +25,6 @@ mongoose
         console.log(e);
     });
 
-app.listen(PORT, "0.0.0.0", () => {
-    console.log(`connected at port ${PORT}`);
+app.listen(port, () => {
+    console.log(`connected at port ${port}`);
 });
