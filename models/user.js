@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
 
 const userSchema = mongoose.Schema({
     email: {
@@ -24,11 +24,26 @@ const userSchema = mongoose.Schema({
             message: "Please enter a password",
         }
     },
+    name: {
+        type: String,
+        validate: {
+            validator: (value) => {
+                
+                return value.length > 5;
+            },
+            message: "Name should not be less than 5 character",
+        }
+    },
     contact: {
         type: String,
         default: '',
-    },    
+    },
+    totalAmount: {
+        type: Number,
+        default: 0,
+    },
+        
 })
 
 const User = mongoose.model('User', userSchema);
-module.exports = User;
+export default User;

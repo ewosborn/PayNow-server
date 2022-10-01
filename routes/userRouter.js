@@ -1,6 +1,8 @@
-const express = require('express');
-const auth = require('../middlewares/auth');
-const User = require('../models/user');
+import express from 'express';
+// import {auth} from '../middlewares/auth.js';
+import User from '../models/user.js';
+import bcryptjs from 'bcryptjs';
+import jwt from 'jsonwebtoken';
 
 const userRouter = express.Router();
 
@@ -59,4 +61,4 @@ userRouter.post('/signin', async (req, res) => {
 
 // 
 
-module.exports = userRouter;
+export default userRouter;

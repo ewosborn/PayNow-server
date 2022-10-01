@@ -1,23 +1,21 @@
-const jwt = require('jsonwebtoken');
+import jwt from 'jsonwebtoken';
 
-const auth = async (req, res, next) => {
+export const auth = async (req, res, next) => {
     try {
-        const token = req.header('x-auth-token');
-        console.log(token);
-        if(!token)
-        return res.status(401).json({ msg: 'No auth token, access denied '});
+        const authorization = req.headers.authorization;
+        if (!authorization) return res.status(401).json({ msg: 'Token not found ' });
+        const token = authorization.slice(7, authorization.length);
+        if (!token)
+            return res.status(401).json({ msg: 'No auth token, access denied ' });
 
-        const verified = jwt.verify(token, 'passwordKey', {
-            expiresIn: '2d',
+        jwt.verify(token, 'passwordKey', (err, decode) => {
+            if (err) return res.status(401).json({ msg: 'Token verification failed, authorization denied' });
+            req.user = decode
+            next();
         });
-        if (!verified) return res.status(401).json({ msg: 'Token verification failed, authorization denied'});
 
-        req.user = verified.id;
-        req.token = token;
-        next();
     } catch (err) {
         res.status(500).json({ error: err.message });
     }
 };
 
-module.exports = auth;
