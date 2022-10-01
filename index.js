@@ -5,6 +5,7 @@ import mongoose from 'mongoose';
 // IMPORTS FROM OTHER FILES
 import userRouter from './routes/userRouter.js';
 import transactionRouter from './routes/transactionRouter.js';
+import uploadRouter from './routes/uploadRouter.js';
 
 // INIT
 const port = process.env.PORT || 3000;
@@ -14,6 +15,7 @@ const DB = "mongodb+srv://paynow:NowPay2022Project@cluster0.tpa8stj.mongodb.net/
 app.use(express.json());
 app.use('/api/user', userRouter);
 app.use('/api/transaction', transactionRouter);
+app.use('/api/upload', uploadRouter);
 
 // Connections
 mongoose
