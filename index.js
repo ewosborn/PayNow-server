@@ -11,7 +11,7 @@ const app = express();
 const DB = "mongodb+srv://paynow:NowPay2022Project@cluster0.tpa8stj.mongodb.net/?retryWrites=true&w=majority";
 
 app.use(express.json());
-app.use('/api/users', userRouter);
+app.use('/api/user', userRouter);
 
 // Connections
 mongoose
